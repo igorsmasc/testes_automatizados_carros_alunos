@@ -14,7 +14,7 @@ import java.util.Objects;
  * Enquanto o carro estiver desligado deve ser capaz de:
  * - Ligar
  * - Motrar estado atual
- * <p>
+ *
  * Enquanto o carro estiver ligado deve ser capaz de:
  * - Desligar
  * - Acelerar
@@ -35,16 +35,14 @@ public class Carro {
     private String modelo;
     private boolean ligado;
     private int velocidadeAtual;
-    private int cavalos;
 
-    public Carro(String cor, String marca, String ano, String modelo, int cavalos) {
+    public Carro(String cor, String marca, String ano, String modelo) {
         this.cor = cor;
         this.marca = marca;
         this.ano = ano;
         this.modelo = modelo;
         this.ligado = false;
         this.velocidadeAtual = 0;
-        this.cavalos = cavalos;
     }
 
     public String getCor() {
@@ -77,14 +75,6 @@ public class Carro {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
-    }
-
-    public int getCavalos() {
-        return cavalos;
-    }
-
-    public void setCavalos(int cavalos) {
-        this.cavalos = cavalos;
     }
 
     public boolean isLigado() {

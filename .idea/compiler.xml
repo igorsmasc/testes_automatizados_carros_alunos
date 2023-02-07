@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="testes_automatizados_carros_alunos - professor" />
         <module name="testes_automatizados_carros_alunos" />
       </profile>
     </annotationProcessing>

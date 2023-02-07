@@ -1,3 +1,4 @@
+import java.util.function.Function;
 
 /**
  *
@@ -26,8 +27,16 @@
  *
  */
 
+// mostrarValor(somar(1, 2));
+    //somar(1, 2) -> 3
+// mostrarValor(3);
+
 public class Main {
     public static void main(String[] args) {
 
+    }
+
+    private static void mostrarValor(int valor) {
+        System.out.println(valor);
     }
 }
