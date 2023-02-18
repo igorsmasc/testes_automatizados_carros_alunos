@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Carro.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">testes_automatizados_carros_alunos</a> &gt; <a href="index.source.html" class="el_package">model</a> &gt; <span class="el_source">Carro.java</span></div><h1>Carro.java</h1><pre class="source lang-java linenums">package model;
+
+import java.util.Objects;
+
+/**
+ * Um carro tem os seguintes atributos:
+ * - cor
+ * - marca
+ * - modelo
+ * - ano
+ * - ligado
+ * - velocidadeAtual
+ * &lt;p&gt;
+ * Enquanto o carro estiver desligado deve ser capaz de:
+ * - Ligar
+ * - Motrar estado atual
+ *
+ * Enquanto o carro estiver ligado deve ser capaz de:
+ * - Desligar
+ * - Acelerar
+ * - Frear
+ * - Motrar estado atual
+ * &lt;p&gt;
+ * Regras:
+ * - Só podemos realizar as ações com o carro ligado
+ * - Só podemos desligar o carro quando ele parar (velocidadeAtual = 0)
+ * - Não existe velocidade negativa
+ */
+
+public class Carro {
+
+    private String cor;
+    private String marca;
+    private String ano;
+    private String modelo;
+    private boolean ligado;
+    private int velocidadeAtual;
+    private int cavalos;
+
+<span class="nc" id="L40">    public Carro(String cor, String marca, String ano, String modelo, int cavalos) {</span>
+<span class="nc" id="L41">        this.cor = cor;</span>
+<span class="nc" id="L42">        this.marca = marca;</span>
+<span class="nc" id="L43">        this.ano = ano;</span>
+<span class="nc" id="L44">        this.modelo = modelo;</span>
+<span class="nc" id="L45">        this.ligado = false;</span>
+<span class="nc" id="L46">        this.velocidadeAtual = 0;</span>
+<span class="nc" id="L47">        this.cavalos = cavalos;</span>
+<span class="nc" id="L48">    }</span>
+
+    public String getCor() {
+<span class="nc" id="L51">        return cor;</span>
+    }
+
+    public void setCor(String cor) {
+<span class="nc" id="L55">        this.cor = cor;</span>
+<span class="nc" id="L56">    }</span>
+
+    public String getMarca() {
+<span class="nc" id="L59">        return marca;</span>
+    }
+
+    public void setMarca(String marca) {
+<span class="nc" id="L63">        this.marca = marca;</span>
+<span class="nc" id="L64">    }</span>
+
+    public String getAno() {
+<span class="nc" id="L67">        return ano;</span>
+    }
+
+    public void setAno(String ano) {
+<span class="nc" id="L71">        this.ano = ano;</span>
+<span class="nc" id="L72">    }</span>
+
+    public String getModelo() {
+<span class="nc" id="L75">        return modelo;</span>
+    }
+
+    public void setModelo(String modelo) {
+<span class="nc" id="L79">        this.modelo = modelo;</span>
+<span class="nc" id="L80">    }</span>
+
+    public int getCavalos() {
+<span class="nc" id="L83">        return cavalos;</span>
+    }
+
+    public void setCavalos(int cavalos) {
+<span class="nc" id="L87">        this.cavalos = cavalos;</span>
+<span class="nc" id="L88">    }</span>
+
+    public boolean isLigado() {
+<span class="nc" id="L91">        return ligado;</span>
+    }
+
+    public void setLigado(boolean ligado) {
+<span class="nc" id="L95">        this.ligado = ligado;</span>
+<span class="nc" id="L96">    }</span>
+
+    public int getVelocidadeAtual() {
+<span class="nc" id="L99">        return velocidadeAtual;</span>
+    }
+
+    public void setVelocidadeAtual(int velocidadeAtual) {
+<span class="nc" id="L103">        this.velocidadeAtual = velocidadeAtual;</span>
+<span class="nc" id="L104">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L108">        return &quot;Carro{&quot; +</span>
+                &quot;cor='&quot; + cor + '\'' +
+                &quot;, marca='&quot; + marca + '\'' +
+                &quot;, ano='&quot; + ano + '\'' +
+                &quot;, modelo='&quot; + modelo + '\'' +
+                &quot;, ligado=&quot; + ligado +
+                &quot;, velocidadeAtual=&quot; + velocidadeAtual +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (this == o) return true;</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        if (!(o instanceof Carro)) return false;</span>
+<span class="nc" id="L122">        Carro carro = (Carro) o;</span>
+<span class="nc" id="L123">        return</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">                cor.equals(carro.cor) &amp;&amp;</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">                        marca.equals(carro.marca) &amp;&amp;</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                        ano.equals(carro.ano) &amp;&amp;</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">                        modelo.equals(carro.modelo);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L132">        return Objects.hash(cor, marca, ano, modelo);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

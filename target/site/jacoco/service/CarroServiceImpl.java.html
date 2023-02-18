@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CarroServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">testes_automatizados_carros_alunos</a> &gt; <a href="index.source.html" class="el_package">service</a> &gt; <span class="el_source">CarroServiceImpl.java</span></div><h1>CarroServiceImpl.java</h1><pre class="source lang-java linenums">package service;
+
+import model.Carro;
+
+<span class="nc" id="L5">public class CarroServiceImpl implements CarroService {</span>
+
+    private GPS gps;
+    private SistemaDeSeguranca sistemaDeSeguranca;
+
+    @Override
+    public void acelerar(Carro carro, int velocidadeAMais) throws Exception {
+<span class="nc bnc" id="L12" title="All 2 branches missed.">        if(velocidadeAMais &lt;= 0) {</span>
+<span class="nc" id="L13">            throw new Exception(&quot;A velocidade deve ser maior que zero&quot;);</span>
+        }
+
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        if(carro.isLigado()) {</span>
+<span class="nc" id="L17">            carro.setVelocidadeAtual(carro.getVelocidadeAtual() + velocidadeAMais);</span>
+<span class="nc" id="L18">            gps.enviarLocalizacao();</span>
+        }
+<span class="nc" id="L20">    }</span>
+
+    @Override
+    public void frear(Carro carro, int velocidadeAMenos) throws Exception {
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if(velocidadeAMenos &lt;= 0) {</span>
+<span class="nc" id="L25">            throw new Exception(&quot;Impossivel frear valor menor que 1!&quot;);</span>
+        }
+
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if(velocidadeAMenos &gt;= carro.getVelocidadeAtual()) {</span>
+<span class="nc" id="L29">            carro.setVelocidadeAtual(0);</span>
+        } else {
+<span class="nc" id="L31">            carro.setVelocidadeAtual(carro.getVelocidadeAtual() - velocidadeAMenos);</span>
+<span class="nc" id="L32">            gps.enviarLocalizacao();</span>
+        }
+<span class="nc" id="L34">    }</span>
+
+    @Override
+    public void ligar(Carro carro) throws Exception {
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        if (sistemaDeSeguranca.travaDeEmergenciaAtivada(carro)) {</span>
+<span class="nc" id="L39">            throw new Exception(&quot;Carro bloqueado!&quot;);</span>
+        }
+<span class="nc" id="L41">        carro.setLigado(true);</span>
+<span class="nc" id="L42">    }</span>
+
+    @Override
+    public void desligar(Carro carro) {
+<span class="nc" id="L46">        carro.setLigado(false);</span>
+<span class="nc" id="L47">    }</span>
+
+    @Override
+    public String estadoAtual(Carro carro) {
+<span class="nc" id="L51">        return &quot;O carro está ligado: &quot; +</span>
+<span class="nc" id="L52">                carro.isLigado() +</span>
+                &quot; e a velocidade atual é: &quot; +
+<span class="nc" id="L54">                carro.getVelocidadeAtual();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

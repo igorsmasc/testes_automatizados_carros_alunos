@@ -16,8 +16,6 @@ public class CarroBuilder {
         return carro;
     }
 
-
-
     public CarroBuilder ligado() {
         carro.setLigado(true);
         return this;

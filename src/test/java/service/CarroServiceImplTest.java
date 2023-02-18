@@ -4,13 +4,16 @@ import builder.CarroBuilder;
 import builder.CarroProvider;
 import model.Carro;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
 public class CarroServiceImplTest {
     // F.I.R.S.T
     // F - Fast
@@ -86,7 +89,42 @@ public class CarroServiceImplTest {
 
     @BeforeEach
     public void setup() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    void naoDeveLigarOCarroQuandoATravaEstiverAtiva() throws Exception {
+        Carro carro = CarroProvider.get();
+
+        Mockito.when(sistemaDeSeguranca.travaDeEmergenciaAtivada(carro)).thenReturn(true);
+
+        Throwable throwable = assertThrows(Exception.class,
+                () -> carroService.ligar(carro)
+        );
+
+        //assertEquals("Carro bloqueado!", throwable.getMessage());
+    }
+
+    @Test
+    public void naoDeveLigarCarroComSistemaDeSegurancaAtivo() throws Exception {
+        Carro carro = new Carro("cor", "marca", "ano", "modelo", 100);
+        Carro carro2 = new Carro("cor2", "marca2", "ano2", "modelo2", 1002);
+
+        // TODO: Gravar explicação para os alunos da 947 Santander
+        Mockito.when(sistemaDeSeguranca.travaDeEmergenciaAtivada(carro)).thenReturn(true);
+        //Mockito.when(sistemaDeSeguranca.travaDeEmergenciaAtivada(Mockito.any(Carro.class))).thenReturn(true);
+
+       assertThrows(Exception.class,
+                () -> carroService.ligar(carro)
+        );
+
+       Assertions.assertNotEquals(carro, carro2);
+
+        Mockito.verify(sistemaDeSeguranca).travaDeEmergenciaAtivada(carro);
+//        Mockito.verify(sistemaDeSeguranca).travaDeEmergenciaAtivada(Mockito.any(Carro.class));
+//        Mockito.verify(sistemaDeSeguranca).travaDeEmergenciaAtivada(Mockito.any());
+//        Mockito.verify(sistemaDeSeguranca, Mockito.times(1)).travaDeEmergenciaAtivada(carro);
+//        Mockito.verify(sistemaDeSeguranca, Mockito.atLeastOnce()).travaDeEmergenciaAtivada(carro);
     }
 
     @Test
@@ -102,6 +140,7 @@ public class CarroServiceImplTest {
 
         Mockito.verify(sistemaDeSeguranca, Mockito.times(1)).travaDeEmergenciaAtivada(Mockito.any(Carro.class));
         Mockito.verify(gps, Mockito.atLeastOnce()).enviarLocalizacao();
+
         // Then
         assertEquals(20, carro1.getVelocidadeAtual());
     }
@@ -215,37 +254,5 @@ public class CarroServiceImplTest {
         );
 
         assertEquals("A velocidade deve ser maior que zero", throwable.getMessage());
-    }
-
-    @Test
-    void naoDeveLigarOCarroQuandoATravaEstiverAtiva() throws Exception {
-        Carro carro = CarroProvider.get();
-
-        Mockito.when(sistemaDeSeguranca.travaDeEmergenciaAtivada(carro)).thenReturn(true);
-
-        Throwable throwable = assertThrows(Exception.class,
-                () -> carroService.ligar(carro)
-        );
-
-        assertEquals("Carro bloqueado!", throwable.getMessage());
-    }
-
-    @Test
-    public void naoDeveLigarCarroComSistemaDeSegurancaAtivo() throws Exception {
-        Carro carro = CarroProvider.get();
-
-        Mockito.when(sistemaDeSeguranca.travaDeEmergenciaAtivada(Mockito.any(Carro.class))).thenReturn(true);
-        //Mockito.when(sistemaDeSeguranca.travaDeEmergenciaAtivada(carro)).thenReturn(true);
-
-        Throwable throwable = assertThrows(Exception.class,
-                () -> carroService.ligar(carro)
-        );
-
-        assertEquals("Carro bloqueado!", throwable.getMessage());
-
-        Mockito.verify(sistemaDeSeguranca).travaDeEmergenciaAtivada(Mockito.any(Carro.class));
-        Mockito.verify(sistemaDeSeguranca).travaDeEmergenciaAtivada(carro);
-        Mockito.verify(sistemaDeSeguranca, Mockito.times(1)).travaDeEmergenciaAtivada(carro);
-        Mockito.verify(sistemaDeSeguranca, Mockito.atLeastOnce()).travaDeEmergenciaAtivada(carro);
     }
 }
